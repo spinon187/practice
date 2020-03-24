@@ -41,3 +41,16 @@ var trap = function(height) {
   }
   return count;
 };
+
+const make2d = heights => {
+    let max = 0;
+    for(i=0;i<heights.length;i++){
+      max = Math.max(max, heights[i])
+    };
+    let new2d = new Array(max-1);
+    for(j=0;j<max;j++){
+      for(i=0;i<heights.length;i++){
+        
+      }
+    }
+}
