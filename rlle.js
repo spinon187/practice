@@ -5,7 +5,7 @@ var removeElements = function(head, val) {
   while(curr){
       if(curr.next && curr.next.val === val){
           curr.next = curr.next.next;
- 
+
       } else {
           curr = curr.next;
       }
