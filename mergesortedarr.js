@@ -7,16 +7,16 @@ const sort2 = (arr, i) => {
 }
 
 var merge = function(nums1, m, nums2, n) {
-  let j = 0, i=0;
-  for(i;i<m;i++){
-      if(nums1[i] > nums2[j]){
-          [nums1[i], nums2[j]] = [nums2[j], nums1[i]];
-          nums2 = sort2(nums2, 0)
-      }
+  m = m-1, n = n-1;
+  for(i=nums1.length-1;i>=0;i--){
+    if(nums1[m] > nums2[n]){
+      nums1[i] = nums1[m];
+      m--;
+    } else {
+      nums1[1] = nums2[n];
+      n--;
+    }
+    if(n<0) return nums1;
   }
-  for(i;i<nums1.length;i++){
-      [nums1[i], nums2[j]] = [nums2[j], nums1[i]];
-      j++
-  }
-  return nums1;
 };
+
