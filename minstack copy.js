@@ -1,9 +1,25 @@
 
-class LLNode {
-  constructor(val){
-    this.val = val;
-    this.next = null;
+class MinHeap {
+  constructor(){
+    this.storage = []
   }
+  insert = x => {
+    this.storage.push(x);
+    this.bubbleUp(this.storage.length-1)
+  }
+  bubbleUp = i => {
+    while(i>0){
+      let p = ~~((i+1)/2) - 1;
+      if(this.storage[p] > this.storage[i]){
+        [this.storage[p], this.storage[i]] = [this.storage[i], this.storage[p]]
+      }
+      i = p;
+    }
+  }
+  getMin = () => {
+    return this.storage[0]
+  }
+  
 }
 
 var MinStack = function() {
