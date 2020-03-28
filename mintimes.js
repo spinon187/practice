@@ -25,3 +25,9 @@
 //   }
 //   return days;
 // }
+
+function minTime(machines, goal) {
+  machines = machines.sort((a,b) => (a-b)){
+    
+  }
+}
