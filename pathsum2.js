@@ -10,7 +10,7 @@ const dfs = (node, t, sum, list, final) => {
     final = dfs(node.left, t, sum, [...list, node.val], final)
   }
   if(node.right){
-    val = dfs(node.right, t, sum, [...list, node.val], final)
+    final = dfs(node.right, t, sum, [...list, node.val], final)
   }
   return final;
 }
