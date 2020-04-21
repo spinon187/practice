@@ -6,6 +6,9 @@ const odd = (s, i, count) => {
 }
 
 function substrCount(n, s) {
-
+  let str;
+  for(let i in n){
+    let
+  }
 
 }
