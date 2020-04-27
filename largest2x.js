@@ -14,3 +14,8 @@ var dominantIndex = function(nums) {
     return -1
   }
 };
+
+const dominantIndex = nums => {
+  let n = [...nums].sort((a,b)=>(b-a));
+  return n[0] >= n[1] ? nums.indexOf(n[0]) : -1
+}
