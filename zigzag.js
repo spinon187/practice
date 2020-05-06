@@ -1,25 +1,26 @@
 var convert = function(s, numRows) {
+  if(numRows === 1) return s;
   let arrs = [];
   for(let i = 0; i<numRows; i++){
-    arrs.push([])
+    arrs.push('')
   }
-  let counter = -1, up = true, down = false;
+  let counter = 0, up = true, down = false;
   for(let i = 0; i<s.length; i++){
-    if(counter < 0){
+    arrs[counter] += s[i];
+    if(counter === 0){
       up = true;
       down = false;
-    } 
-    if(up) counter++;
-    if(counter === numRows){
+    }
+    if(counter === numRows-1){
       up = false;
       down = true;
     }
+    if(up) counter++;
     if(down) counter--;
-    arrs[i].push(s[i]);
   }
   let op = '';
   for(let i = 0; i<numRows; i++){
-    op += arrs[i].join('')
+    op += arrs[i]
   }
   return op
 };
