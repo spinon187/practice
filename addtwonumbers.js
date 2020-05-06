@@ -60,3 +60,31 @@ var addTwoNumbers = function(l1, l2) {
   }
   return newLLHead
 };
+
+const addTwoNumbers = (l1, l2) => {
+  let newHead = new ListNode(), curr = newHead, carriedOne = false;
+  while(l1 || l2){
+    let newVal = 0;
+    if(l1) newVal += l1.val;
+    if(l2) newVal += l2.val;
+    if(carriedOne){
+      newVal += 1;
+      carriedOne = false
+    }
+    if(newVal > 9){
+      newVal = newVal%10;
+      carriedOne = true
+    }
+    curr.val = newVal;
+    l1 = l1.next ? l1.next : null;
+    l2 = l2.next ? l2.next : null;
+    if(l1 || l2){
+      curr.next = new ListNode();
+      curr = curr.next;
+    } else if(carriedOne){
+      curr.next = new ListNode();
+      curr.next.val = 1;
+    }
+  }
+  return newHead
+}
