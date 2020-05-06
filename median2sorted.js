@@ -6,12 +6,20 @@ var findMedianSortedArrays = function(nums1, nums2) {
   j = 0;
   last = null, last2 = null;
   while(counter < target){
-    if(!total%2) last2 = last;
-    if(nums1[i] < nums2[j]){
+    last2 = last;
+    if(i >= nums1.length){
+      last = nums2[j];
+      j++;
+      counter++;
+    } else if(j >= nums2.length){
+      last = nums1[i];
+      i++;
+      counter++;
+    } else if(nums1[i] < nums2[j]){
       last = nums1[i]
       i++;
       counter++
-    } else if(nums1[i] > nums2[j]){
+    } else if(nums1[i] >= nums2[j]){
       last = nums2[j];
       j++;
       counter++
