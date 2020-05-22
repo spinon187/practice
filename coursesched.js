@@ -5,17 +5,18 @@ class Node {
   }
 }
 
-const traverse = (node, set) => {
+const traverse = (node, taken, visited) => {
+  visited.add(node);
   let canTake = true;
   node.prereqs.forEach(n => {
-    if(canTake){
-      if(!set.has(n)){
-        canTake = traverse(n, set)
+    if(!visited.has(n) && canTake){
+      if(!taken.has(n)){
+        canTake = traverse(n, taken, visited)
       }
     }
   })
   if(canTake){
-    set.add(node);
+    taken.add(node);
     return true;
   }
   else {
@@ -32,6 +33,12 @@ var canFinish = function(numCourses, pr) {
   for(let i = 0; i<pr; i++){
     k[pr[i][0]].prereqs.push(k[pr[i][1]])
   }
+  for(let i = 0; i<pr; i++){
+    if(!k[i].prereqs){
+      taken.add(k[i])
+    }
+  }
+
   let j = 0, op = true;
   while(j<numCourses && op){
     op = traverse(k[j], taken)

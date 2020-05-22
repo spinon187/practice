@@ -23,6 +23,6 @@ class TreeNode {
 const generateTree = n => {
   let root = new TreeNode(1), i = 2;
   while(i<n){
-
+    
   }
 }
