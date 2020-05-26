@@ -25,15 +25,25 @@
 //   return -1
 // };
 
-var findJudge = function(N, trust) {
-  let k = {}, trusters = new Set();
+// var findJudge = function(N, trust) {
+//   let k = {}, trusters = new Set();
+//   for(let i = 0; i<trust.length; i++){
+//     let a = trust[i][0], b = trust[i][1];
+//     k[b] = k[b] ? 1 : k[b]+1;
+//     trusters.add(a)
+//   }
+//   for(let i = 1; i<=N; i++){
+//     if(k[i] === N-1 && !trusters.has(i)) return i
+//   }
+//   return -1
+// };
+
+const findJudge = (N, trust) => {
+  if(N === 1) return 1;
+  let arr = new Array(N+1).fill(0);
   for(let i = 0; i<trust.length; i++){
-    let a = trust[i][0], b = trust[i][1];
-    k[b] = k[b] ? 1 : k[b]+1;
-    trusters.add(a)
+    arr[trust[i][0]]--;
+    arr[trust[i][1]]++;
   }
-  for(let i = 1; i<=N; i++){
-    if(k[i] === N-1 && !trusters.has(i)) return i
-  }
-  return -1
-};
+  return arr.indexOf(N-1) || -1;
+}
