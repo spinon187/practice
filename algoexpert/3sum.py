@@ -1,7 +1,7 @@
 def threeNumberSum(array, targetSum):
   output = []
-	array.sort()
-	for x in range(len(array)):
+  array.sort()
+  for x in range(len(array)):
 		remaining = targetSum - array[x]
 		y = x+1
 		z = len(array)-1
