@@ -2,47 +2,56 @@ class Node {
   constructor(val){
     this.val = val;
     this.prereqs = [];
+    this.remaining = 0
   }
 }
 
-const traverse = (node, taken, visited) => {
-  visited.add(node);
-  let canTake = true;
-  node.prereqs.forEach(n => {
-    if(!visited.has(n) && canTake){
-      if(!taken.has(n)){
-        canTake = traverse(n, taken, visited)
-      }
-    }
-  })
-  if(canTake){
-    taken.add(node);
-    return true;
+class Graph {
+  constructor(){
+    this.graph = {}
+    this.nodes = []
   }
-  else {
-    return false;
+
+  addNode = val => {
+    this.graph[val] = new Node(val);
+    this.nodes.push(val)
+  }
+
+  addPrereq = (val, pre) => {
+    let node = this.graph[val],
+    dep = this.graph[pre];
+    node.prereqs.push(dep.val);
+    dep.remaining++
   }
 }
 
-var canFinish = function(numCourses, pr) {
-  let k = {}, taken = new Set();
-  for(let i = 0; i<numCourses; i++){
-    let nn = new Node(i);
-    k[i] = nn;
-  }
-  for(let i = 0; i<pr; i++){
-    k[pr[i][0]].prereqs.push(k[pr[i][1]])
-  }
-  for(let i = 0; i<pr; i++){
-    if(!k[i].prereqs){
-      taken.add(k[i])
+const traverse = graph => {
+  let cleared = [], free = [];
+  for(let i = 0; i < graph.nodes.length; i++){
+    let node = graph.nodes[i]
+    if(!graph.graph[node].remaining){
+      free.push(node)
     }
   }
-
-  let j = 0, op = true;
-  while(j<numCourses && op){
-    op = traverse(k[j], taken)
-    j++
+  while(free.length){
+    let freeNode = free.pop()
+    graph.graph[freeNode].prereqs.forEach(prereq => {
+      graph.graph[prereq].remaining--
+      if(!graph.graph[prereq].remaining) free.push(graph.graph[prereq].val)
+    })
+    cleared.push(freeNode)
   }
-  return op
-};
+  return cleared
+}
+
+const canFinish = (numCourses, prereqs) => {
+  let graph = new Graph(numCourses)
+    for(let i = 0; i<numCourses; i++){
+      graph.addNode(i)
+    }
+  for(let i = 0; i<prereqs.length; i++){
+    graph.addPrereq(prereqs[i][1], prereqs[i][0])
+  }
+  let output = traverse(graph)
+  return output.length === numCourses ? output : []
+}
