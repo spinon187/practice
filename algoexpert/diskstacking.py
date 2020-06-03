@@ -2,7 +2,6 @@ def diskStacking(disks):
 	disks.sort(key=lambda x: x[2])
 	maxes = [d[2] for d in disks]
 	seq = [-1 for x in range(len(disks))]
-	runningMax = disks[0][2]
 	pointer = 0
 	for i in range(len(disks)):
 		for j in range(i):
@@ -13,8 +12,7 @@ def diskStacking(disks):
 				if h1 + maxes[j] > maxes[i]:
 					maxes[i] = h1 + maxes[j]
 					seq[i] = j
-			if maxes[i] > runningMax:
-				runningMax = maxes[i]
+			if maxes[i] > maxes[pointer]:
 				pointer = i
 	output = []
 	while pointer >= 0:
