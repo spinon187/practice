@@ -10,8 +10,9 @@ def shiftLinkedList(head, k):
   if k > 0:
     diff = l - diff
   newTail = head
-  for i in range(1, diff):
+  while diff > 1:
     newTail = newTail.next
+    diff -= 1
   newHead = newTail.next
   newTail.next = None
   tail.next = head
