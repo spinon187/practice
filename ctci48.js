@@ -1,8 +1,19 @@
 const traverse = (node, val1, val2) => {
-  if(node.val === val1 || node.val === val2) return true;
-  const left = traverse(node.left, val1, val2),
-  right = traverse(node.right, val1, val2);
-  return (left && right) ? node : left || right;
+  let found = 0
+  if(node.left){
+    results = traverse(node.left, val1, val2);
+    if(results[1]) return results
+    found += results[0]
+  }
+  if(node.right){
+    results = traverse(node.right, val1, val2);
+    if(results[1]) return results
+    found += results[0]
+  }
+  if(node.val === val1 || node.val === val2){
+    found += 1
+  }
+  return [found, found == 2 ? node : null]
 }
 
 class TreeNode {
