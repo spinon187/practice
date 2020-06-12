@@ -16,7 +16,6 @@
 #     return count
 
 def numUniqueEmails(self, emails):
-    count = 0
     uniques = set()
     for a in emails:
         name, domain = a.split('@')
