@@ -12,7 +12,7 @@ class Solution:
             return
         if node.val < mins[0]:
             mins[0], mins[1] = node.val, mins[0]
-        elif node.val < mins[1] and node.val != mins[0]:
+        elif mins[0] < node.val < mins[1]:
             mins[1] = node.val
         self.traverse(node.left, mins)
         self.traverse(node.right, mins)
