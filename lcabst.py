@@ -20,11 +20,21 @@
 #             LCA = node
 #         return [count, LCA]
 
+# class Solution:
+#     def lowestCommonAncestor(self, root, p, q):
+#         if(root.val >= p.val and root.val <= q.val) or (root.val >= q.val and root.val <= p.val):
+#             return root
+#         if(root.val > q.val and q.val > p.val) or (root.val > p.val and p.val > q.val):
+#             return self.lowestCommonAncestor(root.left, p, q)
+#         elif(root.val < q.val and q.val < p.val) or (root.val < p.val and p.val < q.val):
+#             return self.lowestCommonAncestor(root.right, p, q)
+
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
-        if(root.val >= p.val and root.val <= q.val) or (root.val >= q.val and root.val <= p.val):
-            return root
-        if(root.val > q.val and q.val > p.val) or (root.val > p.val and p.val > q.val):
+        if root.val > max(p.val, q.val):
             return self.lowestCommonAncestor(root.left, p, q)
-        elif(root.val < q.val and q.val < p.val) or (root.val < p.val and p.val < q.val):
+        elif root.val < min(p.val, q.val):
             return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
+        return None
