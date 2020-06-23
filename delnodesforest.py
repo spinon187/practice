@@ -3,7 +3,8 @@ class Solution:
         self.results = []
     
     def delNodes(self, root, to_delete):
-        self.traverse(root, to_delete)
+        to_delete_set = set(to_delete)
+        self.traverse(root, to_delete_set)
         return self.results
 
     def traverse(self, root, to_delete, parent=None, isLeft=True):
