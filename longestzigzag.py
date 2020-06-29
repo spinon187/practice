@@ -1,7 +1,5 @@
 class Solution:
     def longestZigZag(self, root):
-        if root is None:
-            return 0
         
         def traverse(node, left_sum, right_sum):
             if node.left:
